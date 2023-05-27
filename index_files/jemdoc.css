@@ -17,7 +17,8 @@ html {
 }
 
 body { 
-  font-family: Cambria, serif;
+  /*font-family: Cambria, serif; */
+  font-family: Arial, sans-serif;
   font-size: 110%;
   color: #000;
   background-color: #ffffff; 
@@ -136,21 +137,21 @@ strong {
 }
 
 mark {
-	font-family: "Cambria";
+	font-family: Arial,sans-serif;
 	font-size: 100%;
 	font-style: italic;
 	color: #DE3163;
 }
 
 icon {
-	font-family: "Cambria";
+	font-family: Arial,sans-serif;
 	font-size: 100%;
 	font-weight: bold;
 	color: #008080;
 }
 
 button {
-	font-family: "Cambria";
+	font-family: Arial,sans-serif;
 	font-size: 100%;
 	color: #008080;
 	background-color: #F2F3F4;
@@ -170,7 +171,7 @@ button:hover {
 
 h1, h2, h3, h4 {
 	color: #527bbd;
-	font-family: "Cambria";
+	font-family: Arial,sans-serif;
 	margin-top: 0.7em;
 	margin-bottom: 0.5em;
 	padding-bottom: 0.2em;
@@ -206,7 +207,7 @@ h4 {
 }
 
 pz {
-    font-family: "Cambria", serif;
+    font-family: Arial,sans-serif;
     font-size: 105%;
 	margin-top: 0.0em;
 	margin-bottom: 0.8em;
@@ -215,7 +216,7 @@ pz {
 }
 
 p {
-    font-family: "Cambria", serif;
+    font-family: Arial,sans-serif;
     font-size: 100%;
 	margin-top: 0.0em;
 	margin-bottom: 0.8em;
