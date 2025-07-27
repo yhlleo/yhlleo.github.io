@@ -67,7 +67,7 @@
             height: 150px;
             border-radius: 50%;
             margin: 0 auto 30px;
-            background-image: url('./YahuiLiu.jpg');
+            background-image: url('./index_files/YahuiLiu.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -420,6 +420,27 @@
             border-top: 1px solid #e9ecef;
         }
     </style>
+    <script>
+        function switchTab(event, tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show the selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to the clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -648,6 +669,7 @@
                     <div class="news-date">April 2025</div>
                     <p>We released Leanabell-Prover achieving the SOTA 59.8% pass@32 on MiniF2F-test.</p>
                 </div>
+                
             </div>
 
             <div id="services" class="tab-content">
@@ -711,8 +733,7 @@
                     <div class="award-item">
                         <div class="award-icon">⭐</div>
                         <div class="award-title">Technical Expert (技术大咖)</div>
-                        <div class="award-description">Tencent AI Lab, China, 2021</div>
+                        <div class="award-description">Tencent AI Lab, China, 2022</div>
                     </div>
 
-                    <div class="award-item">
-                        <div class="award-icon">🎯
+                    
