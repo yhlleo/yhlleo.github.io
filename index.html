@@ -2,904 +2,547 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yahui Liu - Researcher in AI</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yahui Liu's Homepage">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --accent: #2563eb;
+            --accent-soft: #eff4ff;
+            --accent-dark: #1d4ed8;
+            --text: #1f2430;
+            --text-soft: #4b5568;
+            --muted: #7a8395;
+            --border: #e6e8ee;
+            --bg: #ffffff;
+            --bg-alt: #fafbfc;
+            --tag-bg: #eef2fb;
+            --tag-text: #2952c8;
+            --sidebar-w: 280px;
+            --content-max: 760px;
         }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.6;
-            color: #2c3e50;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
-        .container {
-            max-width: 1200px;
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color .15s ease, border-color .15s ease;
+        }
+        a:hover { color: var(--accent-dark); text-decoration: underline; }
+
+        /* Layout */
+        .layout {
+            display: flex;
+            align-items: flex-start;
+            max-width: 1120px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            padding: 0 32px;
+            gap: 56px;
         }
 
-        .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 60px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-w);
+            flex: 0 0 var(--sidebar-w);
+            position: sticky;
+            top: 0;
+            align-self: flex-start;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 48px 0 32px;
         }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateX(0px) translateY(0px); }
-            50% { transform: translateX(-20px) translateY(-20px); }
-        }
-
-        .profile-section {
-            position: relative;
-            z-index: 2;
-        }
-
-        .profile-image {
+        .sidebar .photo {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            margin: 0 auto 30px;
-            background-image: url('./index_files/YahuiLiu.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 22px;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 20px rgba(30,50,90,.15);
         }
-
-        .name {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .title {
+        .sidebar .name {
             font-size: 1.4rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            font-weight: 300;
+            font-weight: 700;
+            text-align: center;
+            margin: 0 0 6px;
+            letter-spacing: -.01em;
         }
-
-        .contact-info {
+        .sidebar .affil {
+            font-size: .86rem;
+            color: var(--text-soft);
+            text-align: center;
+            margin: 0 0 4px;
+            line-height: 1.45;
+        }
+        .sidebar .socials {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 30px;
+            gap: 16px;
+            margin: 14px 0 26px;
         }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .main-content {
-            padding: 0;
-        }
-
-        .nav-tabs {
-            display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
-            overflow-x: auto;
-        }
-
-        .nav-tab {
-            padding: 20px 30px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #6c757d;
-            transition: all 0.3s ease;
-            position: relative;
-            white-space: nowrap;
-        }
-
-        .nav-tab.active {
-            color: #2a5298;
-            background: white;
-        }
-
-        .nav-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(45deg, #2a5298, #667eea);
-        }
-
-        .tab-content {
-            display: none;
-            padding: 40px;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-title {
-            font-size: 2rem;
-            color: #2a5298;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #e9ecef;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(45deg, #2a5298, #667eea);
-        }
-
-        .about-content p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        .experience-item, .paper-item {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid #2a5298;
-            transition: all 0.3s ease;
-        }
-
-        .experience-item:hover, .paper-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .experience-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #2a5298;
-        }
-
-        .experience-company {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 5px;
-        }
-
-        .experience-date {
-            font-size: 0.95rem;
-            color: #888;
-            background: #f8f9fa;
-            padding: 5px 12px;
-            border-radius: 20px;
-        }
-
-        .paper-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #2a5298;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .paper-authors {
-            color: #666;
-            margin-bottom: 10px;
-            font-size: 1rem;
-        }
-
-        .paper-venue {
-            font-weight: 600;
-            color: #e74c3c;
-            margin-bottom: 15px;
-        }
-
-        .paper-links {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .paper-link {
-            padding: 6px 15px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+        .sidebar .socials a {
+            color: var(--muted);
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+        }
+        .sidebar .socials a:hover { color: var(--accent); }
+        .sidebar .socials svg { width: 20px; height: 20px; fill: currentColor; }
+        .sidebar nav { border-top: 1px solid var(--border); padding-top: 18px; }
+        .sidebar nav a {
+            display: block;
+            font-size: .92rem;
+            color: var(--text-soft);
+            padding: 7px 12px;
+            border-radius: 8px;
+            border-left: 2px solid transparent;
+        }
+        .sidebar nav a:hover {
+            background: var(--accent-soft);
+            color: var(--accent-dark);
+            text-decoration: none;
+            border-left-color: var(--accent);
         }
 
-        .paper-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        /* Main content */
+        main {
+            flex: 1 1 auto;
+            max-width: var(--content-max);
+            min-width: 0;
+            padding: 48px 0 80px;
         }
 
-        .news-item {
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid #28a745;
+        section { margin-bottom: 44px; scroll-margin-top: 24px; }
+
+        h2 {
+            font-size: 1.32rem;
+            font-weight: 700;
+            letter-spacing: -.01em;
+            margin: 0 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        h2 a { font-size: .82rem; font-weight: 500; color: var(--muted); }
+        h3.subhead {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 22px 0 8px;
         }
 
-        .news-date {
+        p { margin: 0 0 14px; color: var(--text-soft); }
+        #bio p, #bio li { color: var(--text-soft); }
+
+        ul { margin: 0 0 14px; padding-left: 22px; }
+        li { margin-bottom: 8px; }
+
+        b { color: var(--text); }
+
+        details { margin: 10px 0; }
+        summary {
+            cursor: pointer;
             font-weight: 600;
-            color: #28a745;
-            font-size: 0.95rem;
+            color: var(--text);
+            padding: 6px 0;
+            list-style-position: inside;
+        }
+        summary:hover { color: var(--accent); }
+        details > *:not(summary) { animation: fade .25s ease; }
+        @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+        .recruit {
+            background: var(--accent-soft);
+            border: 1px solid #cddafc;
+            border-left: 4px solid var(--accent);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 18px 0;
+            color: var(--text) !important;
+            font-weight: 500;
         }
 
-        .awards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+        /* Publications */
+        .pub-note { font-size: .88rem; color: var(--muted); }
+        #pubs ul, #pubs .publist { list-style: none; padding-left: 0; }
+        #pubs .publist {
+            max-height: 42rem;
+            overflow-y: auto;
+            padding: 4px 12px 4px 4px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #fff;
         }
+        #pubs .publist::-webkit-scrollbar { width: 8px; }
+        #pubs .publist::-webkit-scrollbar-thumb {
+            background: #cdd6ea;
+            border-radius: 8px;
+        }
+        #pubs .publist::-webkit-scrollbar-thumb:hover { background: #b3c0dd; }
+        #pubs .publist > li {
+            position: relative;
+            padding: 14px 16px 14px 18px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg-alt);
+            line-height: 1.6;
+            transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+        }
+        #pubs .publist > li:hover {
+            border-color: #cdd6ea;
+            box-shadow: 0 3px 14px rgba(30,50,90,.07);
+        }
+        #pubs .publist > li > a:first-child {
+            font-weight: 600;
+            color: var(--text);
+        }
+        #pubs .publist > li > a:first-child:hover { color: var(--accent); }
+        #pubs .publist li i {
+            display: inline-block;
+            font-style: normal;
+            font-size: .74rem;
+            font-weight: 600;
+            letter-spacing: .02em;
+            color: var(--tag-text);
+            background: var(--tag-bg);
+            padding: 2px 9px;
+            border-radius: 20px;
+            margin-top: 6px;
+        }
+        /* link-badges: [arxiv]/[paper]/[code] etc */
+        #pubs .publist li a:not(:first-child) {
+            font-size: .82rem;
+            color: var(--accent);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        #pubs .publist li font[color="red"],
+        #pubs .publist li b font { color: #dc2626 !important; }
 
-        .award-item {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            padding: 25px;
-            border-radius: 15px;
+        .authors { color: var(--text-soft); font-size: .95rem; }
+
+        /* News, awards etc */
+        #news li, #experience li, #service li, #awards li { color: var(--text-soft); }
+        #news .news-date { font-weight: 600; color: var(--text); }
+
+        #footer {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 28px 32px 48px;
+            border-top: 1px solid var(--border);
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            color: var(--muted);
+            font-size: .85rem;
         }
+        #footer p { color: var(--muted); }
 
-        .award-item:hover {
-            transform: scale(1.05);
-        }
-
-        .award-icon {
-            font-size: 2.5rem;
-            color: #e67e22;
-            margin-bottom: 15px;
-        }
-
-        .award-title {
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .service-category {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .category-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #2a5298;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .service-list {
-            list-style: none;
-        }
-
-        .service-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.95rem;
-        }
-
-        .service-list li:last-child {
-            border-bottom: none;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 15px;
-            }
-
-            .header {
-                padding: 40px 20px;
-            }
-
-            .name {
-                font-size: 2.5rem;
-            }
-
-            .contact-info {
+        /* Responsive */
+        @media (max-width: 860px) {
+            .layout {
                 flex-direction: column;
-                align-items: center;
-                gap: 15px;
+                gap: 0;
+                padding: 0 20px;
             }
-
-            .tab-content {
-                padding: 20px;
+            .sidebar {
+                width: 100%;
+                flex-basis: auto;
+                position: static;
+                height: auto;
+                overflow: visible;
+                padding: 32px 0 24px;
+                border-bottom: 1px solid var(--border);
             }
-
-            .experience-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .nav-tabs {
+            .sidebar .photo { width: 110px; height: 110px; }
+            .sidebar nav {
+                display: flex;
                 flex-wrap: wrap;
+                justify-content: center;
+                gap: 4px;
+                border-top: 1px solid var(--border);
             }
-
-            .nav-tab {
-                padding: 15px 20px;
-                font-size: 1rem;
-            }
-        }
-
-        .footer {
-            text-align: center;
-            padding: 30px;
-            background: #f8f9fa;
-            color: #6c757d;
-            border-top: 1px solid #e9ecef;
+            .sidebar nav a { padding: 6px 10px; border-left: none; }
+            .sidebar nav a:hover { border-left: none; }
+            main { max-width: 100%; padding: 32px 0 64px; }
         }
     </style>
-    <script>
-        function switchTab(event, tabName) {
-            // Hide all tab contents
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            // Remove active class from all tabs
-            const tabs = document.querySelectorAll('.nav-tab');
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            // Show the selected tab content
-            document.getElementById(tabName).classList.add('active');
-
-            // Add active class to the clicked tab
-            event.target.classList.add('active');
-        }
-    </script>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="profile-section">
-                <div class="profile-image"></div>
-                <h1 class="name">Yahui Liu</h1>
-                <p class="title">Researcher in Artificial Intelligence</p>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-building"></i>
-                        <span>Xiaohongshu</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>yahui.cvrs@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Hangzhou, China</span>
-                    </div>
-                    <a href="https://scholar.google.com/citations?user=P8qd0rEAAAAJ&hl=en" target="_blank" class="contact-item" style="text-decoration: none; color: inherit;">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>Google Scholar</span>
-                    </a>
-                    <a href="https://github.com/yhlleo" target="_blank" class="contact-item" style="text-decoration: none; color: inherit;">
-                        <i class="fab fa-github"></i>
-                        <span>GitHub</span>
-                    </a>
-                </div>
-            </div>
-        </header>
+<div class="layout">
+    <aside class="sidebar">
+        <img class="photo" src="./index_files/YahuiLiu.jpg" alt="Yahui Liu">
+        <h1 class="name">Yahui Liu</h1>
+        <p class="affil">Researcher in Artificial Intelligence<br>
+        Xiaohongshu, Hangzhou, China</p>
+        <div class="socials">
+            <a href="mailto:yahui.cvrs@gmail.com" title="Email" aria-label="Email">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>
+            </a>
+            <a href="https://scholar.google.com/citations?user=P8qd0rEAAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar">
+                <svg viewBox="0 0 24 24"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+            </a>
+            <a href="https://github.com/yhlleo" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+            </a>
+        </div>
+        <nav>
+            <a href="#experience">Experience</a>
+            <a href="#pubs">Publications</a>
+            <a href="#news">News</a>
+            <a href="#service">Services</a>
+            <a href="#awards">Awards</a>
+        </nav>
+    </aside>
 
-        <main class="main-content">
-            <nav class="nav-tabs">
-                <button class="nav-tab active" onclick="switchTab(event, 'about')">About</button>
-                <button class="nav-tab" onclick="switchTab(event, 'experience')">Experience</button>
-                <button class="nav-tab" onclick="switchTab(event, 'publications')">Publications</button>
-                <button class="nav-tab" onclick="switchTab(event, 'news')">News</button>
-                <button class="nav-tab" onclick="switchTab(event, 'services')">Services</button>
-                <button class="nav-tab" onclick="switchTab(event, 'awards')">Awards</button>
-            </nav>
+    <main>
 
-            <div id="about" class="tab-content active">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <p>
-                        I am currently an Agent Expert at Xiaohongshu, focusing on cutting-edge research in Multimodal Large Language Models (MLLMs), MLLM Agents, and Agentic Reinforcement Learning.
-                    </p>
-                    <p>
-                        I received my Ph.D. degree from the <a href="http://mhug.disi.unitn.it/">Multimedia and Human Understanding Group (MHUG)</a> at the Department of Information Engineering and Computer Science, University of Trento, Italy, in 2022. I was supervised by Prof. <a href="https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en">Nicu Sebe</a> and Dr. <a href="https://scholar.google.com/citations?user=zN5RTZcAAAAJ&hl=en">Bruno Lepri</a>, with my thesis defense committee including <a href="https://scholar.google.com/citations?hl=en&user=yV3_PTkAAAAJ">Vittorio Murino</a>, <a href="https://scholar.google.com/citations?hl=en&user=1I-DKy8AAAAJ">Zhengyou Zhang</a>, and <a href="https://scholar.google.com/citations?hl=en&user=xf1T870AAAAJ">Elisa Ricci</a>.
-                    </p>
-                    <p>
-                        Before my doctoral studies, I earned my B.Eng. degree in Photogrammetry and Remote Sensing (2015) and M.Eng. degree in Pattern Recognition and Intelligent System (2018) from Wuhan University, China.
-                    </p>
-                    <p>
-                        <strong>We are actively recruiting daily interns for long-term positions. Please feel free to submit your resume to my email for exciting research opportunities!</strong>
-                    </p>
-                </div>
-            </div>
+<section id="bio">
+    <p>I am currently an Agent Expert at Xiaohongshu, focusing on cutting-edge research in Multimodal Large Language Models (MLLMs), MLLM Agents, and Agentic RL.</p>
+    <p>I received my Ph.D. degree from the <a href="http://mhug.disi.unitn.it/">Multimedia and Human Understanding Group (MHUG)</a> at the Department of Information Engineering and Computer Science, University of Trento, Italy, in 2022. I was supervised by Prof. <a href="https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en">Nicu Sebe</a> and Dr. <a href="https://scholar.google.com/citations?user=zN5RTZcAAAAJ&hl=en">Bruno Lepri</a>, with my thesis defense committee including <a href="https://scholar.google.com/citations?hl=en&user=yV3_PTkAAAAJ">Vittorio Murino</a>, <a href="https://scholar.google.com/citations?hl=en&user=1I-DKy8AAAAJ">Zhengyou Zhang</a>, and <a href="https://scholar.google.com/citations?hl=en&user=xf1T870AAAAJ">Elisa Ricci</a>.</p>
+    <p>Before my doctoral studies, I earned my B.Eng. degree in Photogrammetry and Remote Sensing (2015) and M.Eng. degree in Pattern Recognition and Intelligent System (2018) from Wuhan University, China.</p>
+    <p class="recruit">We are actively recruiting daily interns for long-term positions. Please feel free to submit your resume to my email for exciting research opportunities!</p>
+    <p>Email: yahui.cvrs AT gmail.com</p>
+</section>
 
-            <div id="experience" class="tab-content">
-                <h2 class="section-title">Research Experience</h2>
-                
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <div class="experience-title">Agent Expert</div>
-                            <div class="experience-company">Xiaohongshu, Hangzhou, China</div>
-                        </div>
-                        <div class="experience-date">04/2026 - Present</div>
-                    </div>
-                    <p>Research focus: MLLM Agent, Agentic RL</p>
-                </div>
+<section id="experience">
+    <h2>Experience</h2>
+    <ul>
+        <li>04/2026 - Present<br>
+        Agent Expert, Xiaohongshu, Hangzhou, China<br>
+        Research focus: MLLM Agent, Agentic RL</li>
+        <li>01/2025 - 03/2026<br>
+        Researcher, Kuaishou Technology, Beijing, China<br>
+        Research focus: MLLMs, Formal Theorem Proving and AI Agents</li>
+        <li>08/2022 - 01/2025<br>
+        Researcher, Huawei, Shenzhen, China<br>
+        Research focus: Image Generation and Enhancing (GANs and Diffusion Models)</li>
+        <li>2021 - 06/2022<br>
+        Research Intern, Tencent AI Lab, Shenzhen, China<br>
+        Mentors: Dr. <a href="https://scholar.google.com/citations?user=xQZMbkUAAAAJ&hl=en">Linchao Bao</a> and Dr. <a href="https://scholar.google.com/citations?user=aSJcgQMAAAAJ&hl=en">Wei Bi</a><br>
+        Research focus: GANs, Image Domain Translation</li>
+        <li>12/2018 - 06/2022<br>
+        PhD Student, FBK and MHUG, Trento, Italy<br>
+        Mentors: Prof. <a href="https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en">Nicu Sebe</a> and Dr. <a href="https://scholar.google.com/citations?user=zN5RTZcAAAAJ&hl=en">Bruno Lepri</a><br>
+        Research focus: Deep learning, GANs, Cross-modal Representations, Image Domain Translation</li>
+        <li>11/2017 - 09/2018<br>
+        Research Intern, Tencent AI Lab, Shenzhen, China<br>
+        Mentors: Dr. <a href="https://scholar.google.com/citations?user=aSJcgQMAAAAJ&hl=en">Wei Bi</a> and Dr. <a href="https://scholar.google.com/citations?user=ukdqC6IAAAAJ&hl=en">Xiaojiang Liu</a><br>
+        Research focus: Deep Learning, Neural Dialogue Generation</li>
+        <li>03/2015 - 06/2018<br>
+        Master Student, Computer Vision and Remote Sensing (CVRS) Lab, Wuhan, China<br>
+        Mentor: Prof. <a href="https://scholar.google.com/citations?hl=en&user=ZBdFPZYAAAAJ">Jian Yao</a><br>
+        Research focus: Deep Learning, Remote Sensing</li>
+    </ul>
+</section>
 
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <div class="experience-title">Researcher</div>
-                            <div class="experience-company">Kuaishou Technology, Beijing, China</div>
-                        </div>
-                        <div class="experience-date">01/2025 - 03/2026</div>
-                    </div>
-                    <p>Research focus: MLLMs, Formal Theorem Proving and AI Agents</p>
-                </div>
+<section id="pubs">
+    <h2>Publications (<a href="https://scholar.google.com/citations?user=P8qd0rEAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar Profile</a>)</h2>
+    <p class="pub-note">(*: equal contribution, &dagger;: equal contribution, †: correspondence)</p>
 
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <div class="experience-title">Researcher</div>
-                            <div class="experience-company">Huawei, Shenzhen, China</div>
-                        </div>
-                        <div class="experience-date">08/2022 - 01/2025</div>
-                    </div>
-                    <p>Research focus: Image Generation and Enhancing (GANs and Diffusion Models)</p>
-                </div>
+    <details open>
+    <summary><b>Conference Papers</b></summary>
+    <ul class="publist">
 
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <div class="experience-title">Research Intern</div>
-                            <div class="experience-company">Tencent AI Lab, Shenzhen, China</div>
-                        </div>
-                        <div class="experience-date">2021 - 06/2022</div>
-                    </div>
-                    <p>Mentors: Dr. <a href="https://scholar.google.com/citations?user=xQZMbkUAAAAJ&hl=en">Linchao Bao</a> and Dr. <a href="https://scholar.google.com/citations?user=aSJcgQMAAAAJ&hl=en">Wei Bi</a>.</p> 
-                    <p>Research focus: GANs, Image Domain Translation</p>
-                </div>
+        <li><a href="https://arxiv.org/pdf/2601.09609" target="_blank">DPWriter: Reinforcement Learning with Diverse Planning Branching for Creative Writing</a><a href="https://arxiv.org/pdf/2601.09609" target="_blank"> [arxiv]</a>
+        <br>
+        <span class="authors">Qian Cao†, <b>Yahui Liu</b>†, Wei Bi, Yi Zhao, Ruihua Song, Xiting Wang, Ruiming Tang, Guorui Zhou, Han Li</span>
+        <br>
+        <i>ACL 2026</i> <b><font color="red">(Oral)</font></b>
+        </li>
 
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <div class="experience-title">PhD Student</div>
-                            <div class="experience-company">FBK and MHUG, Trento, Italy</div>
-                        </div>
-                        <div class="experience-date">12/2018 - 06/2022</div>
-                    </div>
-                    <p>Mentors: Prof. <a href="https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en">Nicu Sebe</a> and Dr. <a href="https://scholar.google.com/citations?user=zN5RTZcAAAAJ&hl=en">Bruno Lepri</a>.</p> 
-                    <p>Research focus: Deep learning, GANs, Cross-modal Representations, Image Domain Translation</p>
-                </div>
+        <li><a href="https://arxiv.org/pdf/2508.19195" target="_blank">All-in-One Slider for Attribute Manipulation in Diffusion Models</a><a href="https://arxiv.org/pdf/2508.19195" target="_blank"> [arxiv]</a>
+        <br>
+        <span class="authors">Weixin Ye, Hongguang Zhu, Wei Wang, <b>Yahui Liu</b>, Mengyu Wang</span>
+        <br>
+        <i>CVPR 2026</i>
+        </li>
 
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <div class="experience-title">Research Intern</div>
-                            <div class="experience-company">Tencent AI Lab, Shenzhen, China</div>
-                        </div>
-                        <div class="experience-date">11/2017 - 09/2018</div>
-                    </div>
-                    <p>Mentors: Dr. <a href="https://scholar.google.com/citations?user=aSJcgQMAAAAJ&hl=en">Wei Bi</a> and Dr. <a href="https://scholar.google.com/citations?user=ukdqC6IAAAAJ&hl=en">Xiaojiang Liu</a>.</p> 
-                    <p>Research focus: Deep Learning, Neural Dialogue Generation</p>
-                </div>
+        <li><a href="https://arxiv.org/pdf/2505.19236" target="_blank">Evaluating Text Creativity Across Diverse Domains: A Dataset and Large Language Model Evaluator</a><a href="https://arxiv.org/pdf/2505.19236" target="_blank"> [arxiv]</a>
+        <br>
+        <span class="authors">Qian Cao, Xinting Wang, Yuzhou Yuan, <b>Yahui Liu</b>, Fang Luo, Ruihua Song</span>
+        <br>
+        <i>ICLR 2026</i>
+        </li>
 
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <div class="experience-title">Master Student</div>
-                            <div class="experience-company">Computer Vision and Remote Sensing (CVRS) Lab, Wuhan, China</div>
-                        </div>
-                        <div class="experience-date">03/2015 - 06/2018</div>
-                    </div>
-                    <p>Mentor: Prof. <a href="https://scholar.google.com/citations?hl=en&user=ZBdFPZYAAAAJ">Jian Yao</a>. </p>
-                    <p>Research focus: Deep Learning, Remote Sensing</p>
-                </div>
-            </div>
+        <li><a href="https://arxiv.org/pdf/2602.21035" target="_blank">Not Just What's There: Enabling CLIP to Comprehend Negated Visual Descriptions Without Fine-tuning</a><a href="https://arxiv.org/pdf/2602.21035" target="_blank"> [arxiv]</a>
+        <br>
+        <span class="authors">Junhao Xiao, Zhiyu Wu, Hao Lin, <b>Yahui Liu</b>†, Xiaoran Zhao, Zixu Wang, Zejiang He, Yi Chen</span>
+        <br>
+        <i>AAAI 2026</i>
+        </li>
 
-            <div id="publications" class="tab-content">
-                <h2 class="section-title">Selected Publications</h2>
-                
-                <h3 style="color: #2a5298; margin-bottom: 20px; font-size: 1.4rem;">Conference Papers</h3>
+        <li><a href="https://arxiv.org/pdf/2505.22148" target="_blank">What Makes a Good Reasoning Chain? Uncovering Structural Patterns in Long Chain-of-Thought Reasoning</a><a href="https://arxiv.org/pdf/2505.22148" target="_blank"> [arxiv]</a>
+        <br>
+        <span class="authors">Gangwei Jiang*, <b>Yahui Liu*</b>, Zhaoyi Li, Qi Wang, Fuzheng Zhang, Linqi Song, Ying Wei, Defu Lian</span>
+        <br>
+        <i>EMNLP 2025</i>
+        </li>
 
-                <div class="paper-item">
-                    <div class="paper-title">DPWriter: Reinforcement Learning with Diverse Planning Branching for Creative Writing</div>
-                    <div class="paper-authors">Qian Cao†, <strong>Yahui Liu</strong>†, Wei Bi, Yi Zhao, Ruihua Song, Xiting Wang, Ruiming Tang, Guorui Zhou, Han Li</div>
-                    <div class="paper-venue">Annual Meeting of the Association for Computational Linguistics (ACL), 2026 <strong>(Oral)</strong></div>
-                    <div class="paper-links">
-                        <a href="https://arxiv.org/pdf/2601.09609" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a> 
-                    </div>
-                </div>
+        <li><a href="https://arxiv.org/pdf/2506.11155" target="_blank">Evaluating Multimodal Large Language Models on Video Captioning via Monte Carlo Tree Search</a><a href="https://arxiv.org/pdf/2506.11155" target="_blank"> [arxiv]</a><a href="https://github.com/tjunlp-lab/MCTS-VCB" target="_blank"> [code]</a>
+        <br>
+        <span class="authors">Linhao Yu, Xinguang Ji, <b>Yahui Liu</b>, Fanheng Kong, Chenxi Sun, Jingyuan Zhang, Hongzhi Zhang, V. W., Fuzheng Zhang, Deyi Xiong</span>
+        <br>
+        <i>ACL 2025</i>
+        </li>
 
-                <div class="paper-item">
-                    <div class="paper-title">All-in-One Slider for Attribute Manipulation in Diffusion Models</div>
-                    <div class="paper-authors">Weixin Ye, Hongguang Zhu, Wei Wang, <strong>Yahui Liu</strong>, Mengyu Wang</div>
-                    <div class="paper-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2026</div>
-                    <div class="paper-links">
-                        <a href="https://arxiv.org/pdf/2508.19195" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a> 
-                    </div>
-                </div>
+        <li><a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Ren_Masked_Jigsaw_Puzzle_A_Versatile_Position_Embedding_for_Vision_Transformers_CVPR_2023_paper.pdf" target="_blank">Masked Jigsaw Puzzle: A Versatile Position Embedding for Vision Transformers</a><a href="https://arxiv.org/abs/2205.12551" target="_blank"> [arxiv]</a><a href="https://github.com/yhlleo/MJP" target="_blank"> [code]</a>
+        <br>
+        <span class="authors">Bin Ren*, <b>Yahui Liu*</b>, Yue Song, Wei Bi, Rita Cucchiara, Nicu Sebe, Wei Wang</span>
+        <br>
+        <i>CVPR 2023</i>
+        </li>
 
-                <div class="paper-item">
-                    <div class="paper-title">Evaluating Text Creativity Across Diverse Domains: A Dataset and Large Language Model Evaluator</div>
-                    <div class="paper-authors">Qian Cao, Xinting Wang, Yuzhou Yuan, <strong>Yahui Liu</strong>, Fang Luo, Ruihua Song</div>
-                    <div class="paper-venue">International Conference on Learning Representations (ICLR), 2026</div>
-                    <div class="paper-links">
-                        <a href="https://arxiv.org/pdf/2505.19236" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a>
-                    </div>
-                </div>
+        <li><a href="https://proceedings.neurips.cc/paper/2021/file/c81e155d85dae5430a8cee6f2242e82c-Paper.pdf" target="_blank">Efficient Training of Visual Transformers with Small Datasets</a><a href="https://arxiv.org/abs/2106.03746" target="_blank"> [arxiv]</a><a href="https://nips.cc/virtual/2021/poster/27009" target="_blank"> [poster]</a><a href="https://github.com/yhlleo/VTs-Drloc" target="_blank"> [code]</a>
+        <br>
+        <span class="authors"><b>Yahui Liu</b>, Enver Sangineto, Wei Bi, Nicu Sebe, Bruno Lepri, Marco De Nadai</span>
+        <br>
+        <i>NeurIPS 2021</i>
+        </li>
 
-                <div class="paper-item">
-                    <div class="paper-title">Not Just What's There: Enabling CLIP to Comprehend Negated Visual Descriptions Without Fine-tuning</div>
-                    <div class="paper-authors">Junhao Xiao, Zhiyu Wu, Hao Lin, <strong>Yahui Liu</strong>†, Xiaoran Zhao, Zixu Wang, Zejiang He, Yi Chen</div>
-                    <div class="paper-venue">AAAI Conference on Artificial Intelligence (AAAI), 2026</div>
-                    <div class="paper-links">
-                        <a href="https://arxiv.org/pdf/2602.21035" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a>
-                    </div>
-                </div>
-            
+        <li><a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Liu_Smoothing_the_Disentangled_Latent_Style_Space_for_Unsupervised_Image-to-Image_Translation_CVPR_2021_paper.pdf" target="_blank">Smoothing the Disentangled Latent Style Space for Unsupervised Image-to-Image Translation</a><a href="https://openaccess.thecvf.com/content/CVPR2021/supplemental/Liu_Smoothing_the_Disentangled_CVPR_2021_supplemental.pdf" target="_blank"> [supp]</a><a href="https://drive.google.com/file/d/1PNEym3Zc48trSs6BZzf7s_tkIUC3rGhr/view?usp=sharing" target="_blank"> [video]</a><a href="https://github.com/yhlleo/SmoothingLatentSpace" target="_blank"> [code]</a>
+        <br>
+        <span class="authors"><b>Yahui Liu</b>, Enver Sangineto, Yajing Chen, Linchao Bao, Haoxian Zhang, Nicu Sebe, Bruno Lepri, Wei Wang, Marco De Nadai</span>
+        <br>
+        <i>CVPR 2021</i>
+        </li>
 
-                <div class="paper-item">
-                    <div class="paper-title">What Makes a Good Reasoning Chain? Uncovering Structural Patterns in Long Chain-of-Thought Reasoning</div>
-                    <div class="paper-authors">Gangwei Jiang*, <strong>Yahui Liu*</strong>, Zhaoyi Li, Qi Wang, Fuzheng Zhang, Linqi Song, Ying Wei, Defu Lian.</div>
-                    <div class="paper-venue">Conference on Empirical Methods in Natural Language Processing (EMNLP), 2025</div>
-                    <div class="paper-links">
-                        <a href="https://arxiv.org/pdf/2505.22148" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a>
-                    </div>
-                </div>
+        <li><a href="https://dl.acm.org/doi/abs/10.1145/3394171.3413505" target="_blank">Describe What to Change: A Text-guided Unsupervised Image-to-Image Translation Approach</a><a href="https://arxiv.org/abs/2008.04200" target="_blank"> [arxiv]</a><a href="https://github.com/yhlleo/DWC-GAN" target="_blank"> [code]</a>
+        <br>
+        <span class="authors"><b>Yahui Liu</b>, Marco De Nadai, Deng Cai, Huayang Li, Xavier Alameda-Pineda, Nicu Sebe, Bruno Lepri</span>
+        <br>
+        <i>ACM MM 2020</i>
+        </li>
 
-                <div class="paper-item">
-                    <div class="paper-title">Evaluating Multimodal Large Language Models on Video Captioning via Monte Carlo Tree Search</div>
-                    <div class="paper-authors">Linhao Yu, Xinguang Ji, <strong>Yahui Liu</strong>, Fanheng Kong, Chenxi Sun, Jingyuan Zhang, Hongzhi Zhang, V. W., Fuzheng Zhang, Deyi Xiong</div>
-                    <div class="paper-venue">Annual Meeting of the Association for Computational Linguistics (ACL), 2025</div>
-                    <div class="paper-links">
-                        <a href="https://arxiv.org/pdf/2506.11155" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a>
-                        <a href="https://github.com/tjunlp-lab/MCTS-VCB" class="paper-link"><i class="fas fa-code"></i> Code</a>
-                    </div>
-                </div>
+    </ul>
+    </details>
 
-                <div class="paper-item">
-                    <div class="paper-title">Masked Jigsaw Puzzle: A Versatile Position Embedding for Vision Transformers</div>
-                    <div class="paper-authors">Bin Ren*, <strong>Yahui Liu*</strong>, Yue Song, Wei Bi, Rita Cucchiara, Nicu Sebe and Wei Wang (*equal contribution)</div>
-                    <div class="paper-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023</div>
-                    <div class="paper-links">
-                        <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Ren_Masked_Jigsaw_Puzzle_A_Versatile_Position_Embedding_for_Vision_Transformers_CVPR_2023_paper.pdf" class="paper-link"><i class="fas fa-file-pdf"></i> Paper</a>
-                        <a href="https://arxiv.org/abs/2205.12551" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a>
-                        <a href="https://github.com/yhlleo/MJP" class="paper-link"><i class="fas fa-code"></i> Code</a>
-                    </div>
-                </div>
+    <details open>
+    <summary><b>Journal Articles</b></summary>
+    <ul class="publist">
 
-                <div class="paper-item">
-                    <div class="paper-title">Efficient Training of Visual Transformers with Small Datasets</div>
-                    <div class="paper-authors"><strong>Yahui Liu</strong>, Enver Sangineto, Wei Bi, Nicu Sebe, Bruno Lepri, Marco De Nadai</div>
-                    <div class="paper-venue">Advances in Neural Information Processing Systems (NeurIPS), 2021</div>
-                    <div class="paper-links">
-                        <a href="https://proceedings.neurips.cc/paper/2021/file/c81e155d85dae5430a8cee6f2242e82c-Paper.pdf" class="paper-link"><i class="fas fa-file-pdf"></i> Paper</a>
-                        <a href="https://arxiv.org/abs/2106.03746" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a>
-                        <a href="https://nips.cc/virtual/2021/poster/27009" class="paper-link"><i class="fas fa-image"></i> Poster</a>
-                        <a href="https://github.com/yhlleo/VTs-Drloc" class="paper-link"><i class="fas fa-code"></i> Code</a>
-                    </div>
-                </div>
+        <li><a href="https://arxiv.org/pdf/2506.13277" target="_blank">SeqPE: Transformer with Sequential Position Encoding</a><a href="https://arxiv.org/pdf/2506.13277" target="_blank"> [arxiv]</a>
+        <br>
+        <span class="authors">Huayang Li, <b>Yahui Liu</b>†, Hongyu Sun, Deng Cai, Leyang Cui, Wei Bi, Peilin Zhao, Taro Watanabe</span>
+        <br>
+        <i>IEEE TPAMI</i>, 2026
+        </li>
 
-                <div class="paper-item">
-                    <div class="paper-title">Smoothing the Disentangled Latent Style Space for Unsupervised Image-to-Image Translation</div>
-                    <div class="paper-authors"><strong>Yahui Liu</strong>, Enver Sangineto, Yajing Chen, Linchao Bao, Haoxian Zhang, Nicu Sebe, Bruno Lepri, Wei Wang,  Marco De Nadai.</div>
-                    <div class="paper-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021</div>
-                    <div class="paper-links">
-                        <a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Liu_Smoothing_the_Disentangled_Latent_Style_Space_for_Unsupervised_Image-to-Image_Translation_CVPR_2021_paper.pdf" class="paper-link"><i class="fas fa-file-pdf"></i> Paper</a>
-                        <a href="https://openaccess.thecvf.com/content/CVPR2021/supplemental/Liu_Smoothing_the_Disentangled_CVPR_2021_supplemental.pdf" class="paper-link"><i class="fas fa-file-pdf"></i> Supplementary</a>
-                        <a href="https://drive.google.com/file/d/1PNEym3Zc48trSs6BZzf7s_tkIUC3rGhr/view?usp=sharing" class="paper-link"><i class="fas fa-image"></i> Video </a>
-                        <a href="https://github.com/yhlleo/SmoothingLatentSpace" class="paper-link"><i class="fas fa-code"></i> Code</a>
-                    </div>
-                </div>
+        <li><a href="https://arxiv.org/pdf/2505.19236" target="_blank">A Unified Masked Jigsaw Puzzle Framework for Vision and Language Models</a><a href="https://arxiv.org/pdf/2505.19236" target="_blank"> [arxiv]</a>
+        <br>
+        <span class="authors">Weixin Ye, Wei Wang, <b>Yahui Liu</b>, Yue Song, Bin Ren, Wei Bi, Rita Cucchiara, Nicu Sebe</span>
+        <br>
+        <i>IEEE TPAMI</i>, 2025
+        </li>
 
-                <div class="paper-item">
-                    <div class="paper-title">Describe What to Change: A Text-guided Unsupervised Image-to-Image Translation Approach</div>
-                    <div class="paper-authors"><strong>Yahui Liu</strong>, Marco De Nadai, Deng Cai, Huayang Li, Xavier Alameda-Pineda, Nicu Sebe, and Bruno Lepri</div>
-                    <div class="paper-venue">ACM International Conference on Multimedia (ACM MM), 2020</div>
-                    <div class="paper-links">
-                        <a href="https://dl.acm.org/doi/abs/10.1145/3394171.3413505" class="paper-link"><i class="fas fa-file-pdf"></i> Paper</a>
-                        <a href="https://arxiv.org/abs/2008.04200" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a>
-                        <a href="https://github.com/yhlleo/DWC-GAN" class="paper-link"><i class="fas fa-image"></i> Code</a>
-                    </div>
-                </div>
+        <li><a href="#" target="_blank">Spatial Entropy as An Inductive Bias for Vision Transformers</a>
+        <br>
+        <span class="authors">Elia Peruzzo, Enver Sangineto, <b>Yahui Liu</b>, Marco De Nadai, Wei Bi, Bruno Lepri, Nicu Sebe</span>
+        <br>
+        <i>Machine Learning</i>, 2024 (IF: 5.8)
+        </li>
 
+        <li><a href="#" target="_blank">ISF-GAN: An Implicit Style Function for High-Resolution Image-to-Image Translation</a>
+        <br>
+        <span class="authors"><b>Yahui Liu</b>, Yajing Chen, Linchao Bao, Nicu Sebe, Bruno Lepri, Marco De Nadai</span>
+        <br>
+        <i>IEEE TMM</i>, 2022 (IF: 8.4)
+        </li>
 
-                <h3 style="color: #2a5298; margin: 40px 0 20px; font-size: 1.4rem;">Journal Articles</h3>
+        <li><a href="http://yhlleo.github.io/papers/DeepCrack-Neurocomputing2019.pdf" target="_blank">DeepCrack: A Deep Hierarchical Feature Learning Architecture for Crack Segmentation</a><a href="https://github.com/yhlleo/DeepCrack" target="_blank"> [code]</a>
+        <br>
+        <span class="authors"><b>Yahui Liu</b>, Jian Yao, Rengping Xie, Li Li</span>
+        <br>
+        <i>Neurocomputing</i>, 2019 (IF: 5.5)
+        </li>
 
-                <div class="paper-item">
-                    <div class="paper-title">SeqPE: Transformer with Sequential Position Encoding</div>
-                    <div class="paper-authors">Huayang Li, <strong>Yahui Liu</strong>†, Hongyu Sun, Deng Cai, Leyang Cui, Wei Bi, Peilin Zhao, Taro Watanabe</div>
-                    <div class="paper-venue">IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2026</div>
-                    <div class="paper-links">
-                        <a href="https://arxiv.org/pdf/2506.13277" class="paper-link"><i class="fas fa-file-pdf"></i> Paper</a>
-                    </div>
-                </div>
-                
-                <div class="paper-item">
-                    <div class="paper-title">A Unified Masked Jigsaw Puzzle Framework for Vision and Language Models</div>
-                    <div class="paper-authors">Weixin Ye, Wei Wang, <strong>Yahui Liu</strong>, Yue Song, Bin Ren, Wei Bi, Rita Cucchiara and Nicu Sebe</div>
-                    <div class="paper-venue">IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025</div>
-                    <div class="paper-links">
-                        <a href="https://arxiv.org/pdf/2505.19236" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a>
-                    </div>
-                </div>
+        <li><a href="http://yhlleo.github.io/papers/RoadNet-TGRS2019.pdf" target="_blank">RoadNet: Learning to Comprehensively Analyze Road Networks in Complex Urban Scenes From High-Resolution Remotely Sensed Images</a><a href="https://github.com/yhlleo/RoadNet" target="_blank"> [code]</a>
+        <br>
+        <span class="authors"><b>Yahui Liu</b>, Jian Yao, Xiaohu Lu, Menghan Xia, Xingbo Wang, Yuan Liu</span>
+        <br>
+        <i>IEEE TGRS</i>, 2019 (IF: 7.5)
+        </li>
 
-                <div class="paper-item">
-                    <div class="paper-title">Spatial Entropy as An Inductive Bias for Vision Transformers</div>
-                    <div class="paper-authors">Elia Peruzzo, Enver Sangineto, <strong>Yahui Liu</strong>, Marco De Nadai, Wei Bi, Bruno Lepri, Nicu Sebe</div>
-                    <div class="paper-venue">Machine Learning, 2024 (Impact Factor: 5.8)</div>
-                    <div class="paper-links">
-                        <a href="#" class="paper-link"><i class="fas fa-file-pdf"></i> Paper</a>
-                        <a href="#" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a>
-                        <a href="#" class="paper-link"><i class="fas fa-code"></i> Code</a>
-                    </div>
-                </div>
-                
-                <div class="paper-item">
-                    <div class="paper-title">ISF-GAN: An Implicit Style Function for High-Resolution Image-to-Image Translation</div>
-                    <div class="paper-authors"><strong>Yahui Liu</strong>, Yajing Chen, Linchao Bao, Nicu Sebe, Bruno Lepri, Marco De Nadai</div>
-                    <div class="paper-venue">IEEE Transactions on Multimedia (TMM), 2022 (Impact Factor: 8.4)</div>
-                    <div class="paper-links">
-                        <a href="#" class="paper-link"><i class="fas fa-file-pdf"></i> Paper</a>
-                        <a href="#" class="paper-link"><i class="fas fa-file-pdf"></i> arXiv</a>
-                        <a href="#" class="paper-link"><i class="fas fa-code"></i> Code</a>
-                    </div>
-                </div>
-                
-                <div class="paper-item">
-                    <div class="paper-title">DeepCrack: A Deep Hierarchical Feature Learning Architecture for Crack Segmentation</div>
-                    <div class="paper-authors"><strong>Yahui Liu</strong>, Jian Yao, Rengping Xie, and Li Li</div>
-                    <div class="paper-venue">Neurocomputing, 2019 (Impact Factor: 5.5)</div>
-                    <div class="paper-links">
-                        <a href="http://yhlleo.github.io/papers/DeepCrack-Neurocomputing2019.pdf" class="paper-link"><i class="fas fa-file-pdf"></i> Paper</a>
-                        <a href="https://github.com/yhlleo/DeepCrack" class="paper-link"><i class="fas fa-code"></i> Code</a>
-                    </div>
-                </div>
+    </ul>
+    </details>
+</section>
 
-                <div class="paper-item">
-                    <div class="paper-title">RoadNet: Learning to Comprehensively Analyze Road Networks in Complex Urban Scenes From High-Resolution Remotely Sensed Images</div>
-                    <div class="paper-authors"><strong>Yahui Liu</strong>, Jian Yao, Xiaohu Lu, Menghan Xia, Xingbo Wang, and Yuan Liu</div>
-                    <div class="paper-venue">IEEE Transactions on Geoscience and Remote Sensing (TGRS), 2019 (Impact Factor: 7.5)</div>
-                    <div class="paper-links">
-                        <a href="http://yhlleo.github.io/papers/RoadNet-TGRS2019.pdf" class="paper-link"><i class="fas fa-file-pdf"></i> Paper</a>
-                        <a href="https://github.com/yhlleo/RoadNet" class="paper-link"><i class="fas fa-code"></i> Code</a>
-                    </div>
-                </div>    
-            </div>
+<section id="news">
+    <h2>Recent News</h2>
+    <ul>
+        <li><span class="news-date">May 2026</span> — <a href="https://arxiv.org/abs/2506.13277">SeqPE</a> has been accepted to TPAMI.</li>
+        <li><span class="news-date">May 2026</span> — <a href="https://arxiv.org/pdf/2601.09609">DPWriter</a> has been notified of an oral presentation at ACL 2026.</li>
+        <li><span class="news-date">April 2026</span> — Joined Xiaohongshu as Agent Expert, focusing on MLLM Agent and Agentic RL.</li>
+        <li><span class="news-date">April 2026</span> — <a href="https://arxiv.org/pdf/2601.09609">DPWriter</a> was accepted to ACL 2026.</li>
+        <li><span class="news-date">February 2026</span> — <a href="https://arxiv.org/pdf/2508.19195">All-in-One Slider</a> was accepted to CVPR 2026.</li>
+        <li><span class="news-date">January 2026</span> — <a href="https://www.arxiv.org/pdf/2505.19236">CrEval</a> was accepted to ICLR 2026.</li>
+        <li><span class="news-date">November 2025</span> — One paper was accepted to TPAMI.</li>
+        <li><span class="news-date">October 2026</span> — One paper was accepted to AAAI 2026.</li>
+        <li><span class="news-date">July 2025</span> — We released <a href="https://arxiv.org/pdf/2507.08649">Leanabell-Prover-V2</a> for verifier-integrated reasoning via RL.</li>
+        <li><span class="news-date">May 2025</span> — We released <a href="https://arxiv.org/pdf/2505.22148">LCoT2Tree</a> for uncovering structural patterns in Long CoT, accepted to EMNLP.</li>
+        <li><span class="news-date">May 2025</span> — We released the <a href="https://friedrichor.github.io/projects/UNITE/">UNITE</a> framework for Multimodal Information Retrieval.</li>
+        <li><span class="news-date">May 2025</span> — One paper accepted to ACL main conference: <a href="https://arxiv.org/pdf/2506.11155">MCTS-VCB</a>.</li>
+        <li><span class="news-date">April 2025</span> — We released <a href="https://arxiv.org/abs/2504.12316">Capybara-VL</a> and <a href="https://arxiv.org/abs/2504.12315">Capybara-Omni</a> at ICLR 2025 SCI-FM workshop — our efficient MLLMs.</li>
+        <li><span class="news-date">April 2025</span> — We released <a href="https://arxiv.org/pdf/2504.06122">Leanabell-Prover</a> achieving SOTA 59.8% pass@32 on MiniF2F-test.</li>
+    </ul>
+</section>
 
+<section id="service">
+    <h2>Academic Services</h2>
+    <h3 class="subhead">Conference Reviews</h3>
+    <ul>
+        <li>ICML 2026, 2025</li>
+        <li>NeurIPS 2026, 2025, 2024, 2023, 2022</li>
+        <li>ICLR 2027, 2026, 2025, 2024</li>
+        <li>CVPR 2026, 2025, 2024, 2023, 2022, 2021</li>
+        <li>ICCV 2025, 2023, 2021</li>
+        <li>AAAI 2026, 2025</li>
+        <li>ACM MM 2026, 2025, 2024, 2023, 2022, 2021, 2020</li>
+        <li>ACL/EMNLP 2026, 2025, 2024</li>
+        <li>ECCV 2026, 2024, 2022</li>
+        <li>IJCAI 2022, 2021</li>
+    </ul>
+    <h3 class="subhead">Journal Reviews</h3>
+    <ul>
+        <li>IEEE TPAMI</li>
+        <li>International Journal of Computer Vision (IJCV)</li>
+        <li>IEEE Transactions on Industrial Informatics (TII)</li>
+        <li>IEEE GRSL</li>
+        <li>IEEE J-STARS</li>
+        <li>IEEE TNNLS</li>
+        <li>Machine Vision and Applications (MVAP)</li>
+        <li>IEEE TMM</li>
+        <li>Pattern Recognition Letters (PRL)</li>
+        <li>Information Fusion</li>
+    </ul>
+</section>
 
-            <div id="news" class="tab-content">
-                <h2 class="section-title">Recent News</h2>
+<section id="awards">
+    <h2>Selected Awards</h2>
+    <ul>
+        <li>Pengcheng Excellent Talents（鹏城优才）, Shenzhen, China, 2024</li>
+        <li>Top Minds (天才少年) (第一档), Huawei, China, 2022</li>
+        <li>Technical Expert (技术大咖), Tencent AI Lab, China, 2021</li>
+    </ul>
+</section>
 
-                <div class="news-item">
-                    <div class="news-date">May 2026</div>
-                    <p><a href="https://arxiv.org/abs/2506.13277">SeqPE</a> has been accepted to TPAMI. </p>
-                </div>
-                
-                <div class="news-item">
-                    <div class="news-date">May 2026</div>
-                    <p><a href="https://arxiv.org/pdf/2601.09609">DPWriter</a> has been notified of an oral presentation at ACL 2026.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">April 2026</div>
-                    <p>Joined Xiaohongshu as Agent Expert, focusing on MLLM Agent and Agentic RL.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">April 2026</div>
-                    <p><a href="https://arxiv.org/pdf/2601.09609">DPWriter</a> was accepted to ACL 2026.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">February 2026</div>
-                    <p><a href="https://arxiv.org/pdf/2508.19195">All-in-One Slider</a> was accepted to CVPR 2026.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">January 2026</div>
-                    <p><a href="https://www.arxiv.org/pdf/2505.19236">CrEval</a> was accepted to ICLR 2026.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">November 2025</div>
-                    <p>One paper was accepted to TPAMI.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">Oct 2026</div>
-                    <p>One paper was accepted to AAAI 2026.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">July 2025</div>
-                    <p>We released <a href="https://arxiv.org/pdf/2507.08649">Leanabell-Prover-V2</a> for verifier-integrated reasoning via RL.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">June 2025</div>
-                    <p>We released <a href="https://arxiv.org/abs/2506.13277">SeqPE</a> for universal positional encoding.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">May 2025</div>
-                    <p>We released <a href="https://arxiv.org/pdf/2505.22148">LCoT2Tree</a> for uncovering structural patterns in Long CoT, which was accepted to EMNLP.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">May 2025</div>
-                    <p>We released the <a href="https://friedrichor.github.io/projects/UNITE/">UNITE</a> framework for Multimodal Information Retrieval.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">May 2025</div>
-                    <p>One paper accepted to ACL main conference: <a href="https://arxiv.org/pdf/2506.11155">MCTS-VCB</a>.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">April 2025</div>
-                    <p>We released <a href="https://arxiv.org/abs/2504.12316">Capybara-VL</a> and <a href="https://arxiv.org/abs/2504.12315">Capybara-Omni</a> at ICLR 2025 SCI-FM workshop - our efficient MLLMs.</p>
-                </div>
-
-                <div class="news-item">
-                    <div class="news-date">April 2025</div>
-                    <p>We released <a href="https://arxiv.org/pdf/2504.06122">Leanabell-Prover</a> achieving the SOTA 59.8% pass@32 on MiniF2F-test.</p>
-                </div>
-                
-            </div>
-
-            <div id="services" class="tab-content">
-                <h2 class="section-title">Academic Services</h2>
-                
-                <div class="services-grid">
-                    <div class="service-category">
-                        <h3 class="category-title">
-                            <i class="fas fa-users"></i>
-                            Conference Reviews
-                        </h3>
-                        <ul class="service-list">
-                            <li>ICML 2026, 2025</li>
-                            <li>AAAI 2026, 2025</li>
-                            <li>CVPR 2026, 2025, 2024, 2023, 2022, 2021</li>
-                            <li>NeurIPS 2026, 2025, 2024, 2023, 2022</li>
-                            <li>ACM MM 2026, 2025, 2024, 2023, 2022, 2021, 2020</li>
-                            <li>ACL/EMNLP 2026, 2025, 2024</li>
-                            <li>ECCV 2026, 2024, 2022</li>
-                            <li>ICCV 2025, 2023, 2021</li>
-                            <li>IJCAI 2022, 2021</li>
-                        </ul>
-                    </div>
-
-                    <div class="service-category">
-                        <h3 class="category-title">
-                            <i class="fas fa-journal-whills"></i>
-                            Journal Reviews
-                        </h3>
-                        <ul class="service-list">
-                            <li>IEEE TPAMI</li>
-                            <li>International Journal of Computer Vision (IJCV)</li>
-                            <li>IEEE Transactions on Industrial Informatics (TII)</li>
-                            <li>IEEE GRSL</li>
-                            <li>IEEE J-STARS</li>
-                            <li>IEEE TNNLS</li>
-                            <li>Machine Vision and Applications (MVAP)</li>
-                            <li>IEEE TMM</li>
-                            <li>Pattern Recognition Letters (PRL)</li>
-                            <li>Information Fusion</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div id="awards" class="tab-content">
-                <h2 class="section-title">Selected Awards</h2>
-                
-                <div class="awards-grid">
-                    <div class="award-item">
-                        <div class="award-icon">🏆</div>
-                        <div class="award-title">Pengcheng Excellent Talents</div>
-                        <div class="award-description">Shenzhen, China, 2024</div>
-                    </div>
-
-                    <div class="award-item">
-                        <div class="award-icon">⭐</div>
-                        <div class="award-title">Top Minds (天才少年) (第一档)</div>
-                        <div class="award-description">Huawei, China, 2022</div>
-                    </div>
-
-                    <div class="award-item">
-                        <div class="award-icon">⭐</div>
-                        <div class="award-title">Technical Expert (技术大咖)</div>
-                        <div class="award-description">Tencent AI Lab, China, 2021</div>
-                    </div>
-
-                    
+    </main>
+</div>
+<div id="footer">
+    <p>Last update: September 2026.</p>
+</div>
+</body>
+</html>
